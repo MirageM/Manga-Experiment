@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-section {
+            max-width: 600px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-section">
+        <div class="image-container" id="imageContainer">
+            <!-- Insert your image URLs here -->
+            <img src="1106/01.png" alt="Image 1">
+            <img src="1106/03.png" alt="Image 2">
+            <img src="1106/04.png" alt="Image 3">
+            <!-- Add more images as needed -->
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button onclick="previousImages()">Previous</button>
+        <button onclick="nextImages()">Next</button>
+    </div>
+
+    <script>
+        const images = [
+            "1106/01.png",
+            "image2.jpg",
+            "image3.jpg",
+            // Add more images as needed
+        ];
+
+        let currentIndex = 0;
+        const imageContainer = document.getElementById("imageContainer");
+
+        function showImages(index) {
+            const offset = -index * 100;
+            imageContainer.style.transform = `translateX(${offset}%)`;
+        }
+
+        function previousImages() {
+            currentIndex = Math.max(0, currentIndex - 1);
+            showImages(currentIndex);
+        }
+
+        function nextImages() {
+            currentIndex = Math.min(images.length - 1, currentIndex + 1);
+            showImages(currentIndex);
+        }
+
+        // Show the initial set of images
+        showImages(currentIndex);
+    </script>
+
+</body>
+</html>

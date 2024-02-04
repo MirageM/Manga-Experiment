@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-section {
+            max-width: 600px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-section">
+        <div class="image-container" id="imageContainer">
+            <!-- Insert your image URLs here for the first 13 images -->
+            <img src="1106/01.png" alt="Image 1">
+            <img src="1106/03.png" alt="Image 2">
+            <!-- Add more images as needed up to 13 -->
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button onclick="previousPage()">Previous</button>
+        <button onclick="nextPage()">Next</button>
+    </div>
+
+    <script>
+        const images = [
+            "1106/01.png", "1106/03.png", "1106/04.png", "1106/05.png", "1106/06.png",
+            "1106/07.png", "1106/08.png", "image8.jpg", "image9.jpg", "image10.jpg",
+            "image11.jpg", "image12.jpg", "image13.jpg",
+            // Add more images as needed
+        ];
+
+        const imagesPerPage = 13;
+        let currentPage = 0;
+        const imageContainer = document.getElementById("imageContainer");
+
+        function showPage(page) {
+            const start = page * imagesPerPage;
+            const end = start + imagesPerPage;
+            const pageImages = images.slice(start, end);
+
+            const imageElements = pageImages.map(image => {
+                return `<img src="${image}" alt="Image">`;
+            });
+
+            imageContainer.innerHTML = imageElements.join('');
+        }
+
+        function previousPage() {
+            currentPage = Math.max(0, currentPage - 1);
+            showPage(currentPage);
+        }
+
+        function nextPage() {
+            const maxPage = Math.ceil(images.length / imagesPerPage) - 1;
+            currentPage = Math.min(maxPage, currentPage + 1);
+            showPage(currentPage);
+        }
+
+        // Show the initial set of images
+        showPage(currentPage);
+    </script>
+
+</body>
+</html>
